@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SHIP</title>
+    <link rel="stylesheet" href="/css/shipById.css">
+</head>
+<body>
+<h1>SHIP</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Планета</th>
+        <th>Тип</th>
+        <th>Дата</th>
+        <th>Использованный</th>
+        <th>Скорость</th>
+        <th>Размер</th>
+        <th>Рейтинг</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${shipById.id}">ID</td>
+        <td th:text="${shipById.name}">Название</td>
+        <td th:text="${shipById.planet}">Планета</td>
+        <td th:text="${shipById.shipType}">Тип</td>
+        <td th:text="${shipById.prodDate}">Дата</td>
+        <td th:text="${shipById.used}">Использованный</td>
+        <td th:text="${shipById.speed}">Скорость</td>
+        <td th:text="${shipById.crewSize}">Размер</td>
+        <td th:text="${shipById.rating}">Рейтинг</td>
+    </tr>
+    </tbody>
+</table>
+<h1>Редактировать данные</h1>
+<form th:action="@{/ships/update}" th:object="${shipById}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="name">Название:</label>
+    <input type="text" id="name" th:field="*{name}" placeholder="Введите название" required />
+
+    <label for="planet">Планета:</label>
+    <input type="text" id="planet" th:field="*{planet}" placeholder="Введите планету" required />
+
+    <label for="shipType">Тип:</label>
+    <input type="text" id="shipType" th:field="*{shipType}" placeholder="Введите тип" required />
+
+    <label for="prodDate">Дата производства:</label>
+    <input type="date" id="prodDate" th:field="*{prodDate}" required />
+
+    <label for="used">Использованный:</label>
+    <select id="used" th:field="*{used}" required>
+        <option value="true" th:selected="${shipById.used}">Да</option>
+        <option value="false" th:selected="${!shipById.used}">Нет</option>
+    </select>
+
+    <label for="speed">Скорость:</label>
+    <input type="number" id="speed" th:field="*{speed}" step="0.0001" placeholder="Введите скорость" required />
+
+    <label for="crewSize">Размер экипажа:</label>
+    <input type="number" id="crewSize" th:field="*{crewSize}" placeholder="Введите размер экипажа" required />
+
+    <button type="submit">Сохранить изменения</button>
+</form>
+
+<form th:action="@{/ships/delete/{id}(id=${shipById.id})}" th:method="POST" class="delete-form">
+    <input type="submit" value="Удалить корабль">
+</form>
+<div class="mainButton"><a href="/ships">Вернуться к списку кораблей</a></div>
+
+</body>
+</html>

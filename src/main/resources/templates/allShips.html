@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>COSMOPORT</title>
+    <link rel="stylesheet" href="/css/allShips.css" />
+</head>
+<body>
+<h1>COSMOPORT</h1>
+<div class="mainButton"><a href="/ships">Вернуться к списку кораблей</a></div>
+<div class="mainButton"><a href="/create">Создать новый корабль</a></div>
+<form action="/search" method="get">
+    <input type="text" name="name" placeholder="Введите название корабля">
+    <button type="submit">Поиск</button>
+</form>
+
+<div th:if="${message}">
+    <p th:text="${message}" style="color: red;"></p>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Планета</th>
+        <th>Тип</th>
+        <th>Дата</th>
+        <th>Использованный</th>
+        <th>Скорость</th>
+        <th>Размер</th>
+        <th>Рейтинг</th>
+        <th>Перейти</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ship : ${ships}">
+        <td th:text="${ship.id}">ID</td>
+        <td th:text="${ship.name}">Название</td>
+        <td th:text="${ship.planet}">Планета</td>
+        <td th:text="${ship.shipType}">Тип</td>
+        <td th:text="${ship.prodDate}">Дата</td>
+        <td th:text="${ship.used}">Использованный</td>
+        <td th:text="${ship.speed}">Скорость</td>
+        <td th:text="${ship.crewSize}">Размер</td>
+        <td th:text="${ship.rating}">Рейтинг</td>
+        <td><a th:href="@{/ships/{id}(id=${ship.id})}">Перейти</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

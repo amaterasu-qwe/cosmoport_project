@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New ship</title>
+    <link rel="stylesheet" href="/css/newForm.css">
+</head>
+<body>
+<h1>Добавить новый корабль</h1>
+<div class="mainButton"><a href="/ships">Вернуться к списку кораблей</a></div>
+<form th:action="@{/create}" th:object="${ship}" method="post">
+    <label for="name">Название:</label>
+    <input type="text" id="name" th:field="*{name}" placeholder="Введите название" required>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Название Error</div>
+
+    <label for="planet">Планета:</label>
+    <input type="text" id="planet" th:field="*{planet}" placeholder="Введите планету" required>
+    <div th:if="${#fields.hasErrors('planet')}" th:errors="*{planet}">Планета Error</div>
+
+
+    <label for="shipType">Тип:</label>
+    <input type="text" id="shipType" th:field="*{shipType}" placeholder="Введите тип" required>
+    <div th:if="${#fields.hasErrors('shipType')}" th:errors="*{shipType}">Тип Error</div>
+
+    <label for="prodDate">Дата производства:</label>
+    <input type="date" id="prodDate" th:field="*{prodDate}" required>
+
+    <label for="used">Использован:</label>
+    <select id="used" th:field="*{used}" required>
+
+        <option value="true">Да</option>
+        <option value="false">Нет</option>
+    </select>
+    <div th:if="${#fields.hasErrors('used')}" th:errors="*{used}">Использован ли Error</div>
+
+    <label for="speed">Скорость:</label>
+    <input type="number" id="speed" th:field="*{speed}" step="0.01" placeholder="Введите скорость" required>
+    <div th:if="${#fields.hasErrors('speed')}" th:errors="*{speed}">Скорость Error</div>
+
+    <label for="crewSize">Размер экипажа:</label>
+    <input type="number" id="crewSize" th:field="*{crewSize}" placeholder="Введите размер экипажа" required>
+    <div th:if="${#fields.hasErrors('crewSize')}" th:errors="*{crewSize}">Размер экипажа Error</div>
+
+    <button type="submit">Добавить</button>
+</form>
+</body>
+</html>
